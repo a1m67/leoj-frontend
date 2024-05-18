@@ -49,11 +49,12 @@ router.afterEach((to, from, failure) => {
 const store = useStore();
 console.log(store.state.user?.loginUser);
 
-setTimeout(() => {
-  store.dispatch("user/getLoginUser", {
-    userName: "小乐",
-  });
-}, 3000);
+// setTimeout(() => {
+//   store.dispatch("user/getLoginUser", {
+//     userName: "小乐",
+//     role: "admin",
+//   });
+// }, 3000);
 
 // 默认主页
 const selectKeys = ref(["/"]);
