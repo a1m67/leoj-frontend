@@ -1,4 +1,4 @@
-# yuoj-frontend
+# leoj-frontend
 
 ## Project setup
 ```
