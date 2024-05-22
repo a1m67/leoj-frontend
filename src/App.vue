@@ -30,7 +30,14 @@ nav a.router-link-exact-active {
 import BasicLayout from "@/layouts/BasicLayout";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-
+import { onMounted } from "vue";
+// 全局项目入口
+const doInit = () => {
+  console.log("hello, 欢迎欢迎");
+};
+onMounted(() => {
+  doInit();
+});
 const router = useRouter();
 const store = useStore();
 
