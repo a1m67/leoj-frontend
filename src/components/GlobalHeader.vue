@@ -1,8 +1,5 @@
 <template>
   <a-row id="globalHeader" align="center" :wrap="false">
-    <a-col flex="100px">
-      <div>100px</div>
-    </a-col>
     <a-col flex="auto">
       <a-menu
         mode="horizontal"
@@ -58,6 +55,7 @@ const visibleRoutes = computed(() => {
     return true;
   });
 });
+
 // 默认主页
 const selectedKeys = ref(["/"]);
 
@@ -66,11 +64,11 @@ router.afterEach((to, from, failure) => {
   selectedKeys.value = [to.path];
 });
 
-console.log(store.state.user?.loginUser);
+console.log();
 
 setTimeout(() => {
   store.dispatch("user/getLoginUser", {
-    userName: "小乐",
+    userName: "小乐管理员",
     userRole: ACCESS_ENUM.ADMIN,
   });
 }, 3000);
