@@ -6,8 +6,7 @@
     <a-col flex="auto">
       <a-menu
         mode="horizontal"
-        :selected-keys="selectKeys"
-        :default-selected-keys="['1']"
+        :selected-keys="selectedKeys"
         @menu-item-click="doMenuClick"
       >
         <a-menu-item
@@ -20,7 +19,7 @@
             <div class="title">樂 OJ</div>
           </div>
         </a-menu-item>
-        <a-menu-item v-for="item in routes" :key="item.path">
+        <a-menu-item v-for="item in visibleRoutes" :key="item.path">
           {{ item.name }}
         </a-menu-item>
       </a-menu>
@@ -36,28 +35,45 @@
 <script setup lang="ts">
 import { routes } from "../router/routes";
 import { useRoute, useRouter } from "vue-router";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import checkAccess from "@/access/checkAccess";
+import ACCESS_ENUM from "@/access/accessEnum";
 
 const router = useRouter();
+const store = useStore();
 
-// 路由跳转时更新选中的菜单项
+// 展示在菜单的路由数组
+const visibleRoutes = computed(() => {
+  return routes.filter((item, index) => {
+    if (item.meta?.hideInMenu) {
+      return false;
+    }
+    // 根据权限过滤菜单
+    if (
+      !checkAccess(store.state.user.loginUser, item?.meta?.access as string)
+    ) {
+      return false;
+    }
+    return true;
+  });
+});
+// 默认主页
+const selectedKeys = ref(["/"]);
+
+// 路由跳转后，更新选中的菜单项
 router.afterEach((to, from, failure) => {
-  selectKeys.value = [to.path];
+  selectedKeys.value = [to.path];
 });
 
-const store = useStore();
 console.log(store.state.user?.loginUser);
 
-// setTimeout(() => {
-//   store.dispatch("user/getLoginUser", {
-//     userName: "小乐",
-//     role: "admin",
-//   });
-// }, 3000);
-
-// 默认主页
-const selectKeys = ref(["/"]);
+setTimeout(() => {
+  store.dispatch("user/getLoginUser", {
+    userName: "小乐",
+    userRole: ACCESS_ENUM.ADMIN,
+  });
+}, 3000);
 
 const doMenuClick = (key: string) => {
   router.push({

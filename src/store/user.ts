@@ -1,24 +1,25 @@
 // initial state
 // 定义全局变量
 import { StoreOptions } from "vuex";
+import ACCESS_ENUM from "@/access/accessEnum";
 
 export default {
   namespaced: true,
   state: () => ({
     loginUser: {
-      userName: "zhang",
-      role: "notLogin",
+      userName: "游客",
+      userRole: ACCESS_ENUM.NOT_LOGIN,
     },
   }),
   actions: {
     getLoginUser({ commit, state }, payload) {
       //todo 改为远程获取登录信息
-      commit("updateUser", { userName: "小乐" });
+      commit("updateUser", payload);
     },
   },
   mutations: {
     updateUser(state, payload) {
-      state.loginUser += payload;
+      state.loginUser = payload;
     },
   },
 } as StoreOptions<any>;
