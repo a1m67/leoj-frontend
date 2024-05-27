@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 #basicLayout {
 }
 
@@ -22,7 +22,7 @@
 }
 
 #basicLayout .content {
-  background: linear-gradient(to right, #aaa, #fff);
+  background: linear-gradient(to right, #fefefe, #fff);
   margin-bottom: 16px;
   padding: 20px;
 }
