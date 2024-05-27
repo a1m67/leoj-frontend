@@ -113,11 +113,13 @@ let form = ref({
   tags: [],
   answer: "",
   content: "",
-  judgeConfig: {
-    memoryLimit: 1000,
-    stackLimit: 1000,
-    timeLimit: 1000,
-  },
+  judgeConfig: [
+    {
+      memoryLimit: 1000,
+      stackLimit: 1000,
+      timeLimit: 1000,
+    },
+  ],
   judgeCase: [
     {
       input: "",
