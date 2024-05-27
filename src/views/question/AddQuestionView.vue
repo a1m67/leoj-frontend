@@ -153,11 +153,13 @@ const loadData = async () => {
       form.value.judgeCase = JSON.parse(form.value.judgeCase as any);
     }
     if (!form.value.judgeConfig) {
-      form.value.judgeConfig = {
-        memoryLimit: 1000,
-        stackLimit: 1000,
-        timeLimit: 1000,
-      };
+      form.value.judgeConfig = [
+        {
+          memoryLimit: 1000,
+          stackLimit: 1000,
+          timeLimit: 1000,
+        },
+      ];
     } else {
       form.value.judgeConfig = JSON.parse(form.value.judgeConfig as any);
     }
